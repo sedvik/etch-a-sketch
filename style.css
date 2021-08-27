@@ -5,7 +5,22 @@ body {
 h1 {
     text-align: center;
     font-family: 'Pacifico', cursive;
-    font-size: 40px;
+    font-size: 2.5rem;
+}
+
+.clear-btn {
+    display: block;
+    margin: 0px auto 40px auto;
+    font-size: 1.1rem;
+    border: 1px solid black;
+    color: white;
+    font-weight: bold;
+    background-color: red;
+}
+
+.clear-btn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .grid-container {
