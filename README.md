@@ -1,0 +1,1 @@
+This is an implementation of the The Odin Project Etch-A-Sketch project in order to practice DOM manipulation techniques. A square grid is generated with individual divs that change color when hovered over.
