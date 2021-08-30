@@ -1,10 +1,12 @@
-// Global variables and constants
-let divsPerSide = 50;
+// Initial variables and constants
+const initialDivsPerSide = 50;
 const gridSize = 960 // Width and length of the grid container
-let divWidth = gridSize / divsPerSide;
 
 // createGrid function - Creates a new etch-a-sketch grid
-function createGrid() {
+function createGrid(gridSize, divsPerSide) {
+    // Calculate div width
+    const divWidth = gridSize / divsPerSide;
+
     // Update grid container width and height according to gridSize var
     const gridContainer = document.querySelector('.grid-container');
     gridContainer.setAttribute('style', `height: ${gridSize}px; width: ${gridSize}px;`);
@@ -48,17 +50,14 @@ function resetPad() {
         userDivsPerSide = parseInt(prompt("Enter the number of squares per side (must be between 1 and 100)"));
     } while (!isValidDivsPerSide(userDivsPerSide));
 
-    divsPerSide = userDivsPerSide;
-
-    // Calculate new div width
-    divWidth = gridSize / divsPerSide;
+    const divsPerSide = userDivsPerSide;
 
     // Remove previous grid divs
     const gridContainer = document.querySelector('.grid-container');
     gridContainer.textContent = '';
 
     // Draw the new grid
-    createGrid();
+    createGrid(gridSize, divsPerSide);
 }
 
 // Add event listener to "Clear Sketch Pad" button
@@ -66,5 +65,4 @@ const clearBtn = document.querySelector('.clear-btn');
 clearBtn.addEventListener('click', resetPad);
 
 // Initial execution of createGrid function on page load
-createGrid();
-
+createGrid(gridSize, initialDivsPerSide);
