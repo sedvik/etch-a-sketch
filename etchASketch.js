@@ -1,7 +1,7 @@
 // Global variables and constants
 let divsPerSide = 50;
 const gridSize = 960 // Width and length of the grid container
-const divWidth = gridSize / divsPerSide;
+let divWidth = gridSize / divsPerSide;
 
 // createGrid function - Creates a new etch-a-sketch grid
 function createGrid() {
@@ -25,6 +25,13 @@ function createGrid() {
     }
 }
 
+// isValidDivsPerSide function - validates that user input for divsPerSide is between 1 and 100 and is a valid number
+function isValidDivsPerSide(divsPerSide) {
+    return (typeof(divsPerSide) === 'number' && 
+            (divsPerSide >= 1 && divsPerSide <= 100)
+    );
+}
+
 // Event handler functions
 
 // Etch function - Adds the .hovered class to a div to "etch" it with a different color
@@ -32,14 +39,32 @@ function etch(e) {
     e.target.classList.add('hovered');
 }
 
-// clearPad function - Prompts the user for a new # of squares per side and clears the current grid
-function clearPad(e) {
+// resetPad function - Prompts the user for a new # of squares per side and clears the current grid
+function resetPad() {
+    // Prompt the user for a new divsPerSide value
+    let userDivsPerSide;
 
+    do {
+        userDivsPerSide = parseInt(prompt("Enter the number of squares per side (must be between 1 and 100)"));
+    } while (!isValidDivsPerSide(userDivsPerSide));
+
+    divsPerSide = userDivsPerSide;
+
+    // Calculate new div width
+    divWidth = gridSize / divsPerSide;
+
+    // Remove previous grid divs
+    const gridContainer = document.querySelector('.grid-container');
+    gridContainer.textContent = '';
+
+    // Draw the new grid
+    createGrid();
 }
 
 // Add event listener to "Clear Sketch Pad" button
 const clearBtn = document.querySelector('.clear-btn');
+clearBtn.addEventListener('click', resetPad);
 
-// Initial run of createGrid function on page load
+// Initial execution of createGrid function on page load
 createGrid();
 
